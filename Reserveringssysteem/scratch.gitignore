@@ -1,0 +1,5 @@
+index.php - invulformulier voor de gegevens met verzend knop, include_once database.php
+        stuur gegevens door naar de volgende pagina
+
+details.php
+create.php

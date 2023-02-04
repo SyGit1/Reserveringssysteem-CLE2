@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesopdrachten week 3</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+<section class="section content">
+    <div class="container">
+        <h2 class="title is-2">
+            Overzicht van de lesopdrachten van week 3
+        </h2>
+        <h3 class="title is-4">
+            Opdracht 1
+        </h3>
+        <p class="mb-4">
+            In deze opdracht ga je oefenen met het ophalen van data uit de database. Hiervoor heb je eerst een database
+            nodig. Er is al een database aangemaakt en deze is geëxporteerd in de vorm van een <code>.sql</code> bestand met de
+            naam: <a href="music_collection.sql" download>music_collection.sql</a> (in de map week3/exercises)
+        </p>
+        <h4 class="title is-5">
+            Importeer de database
+        </h4>
+        <ul>
+            <li>Zorg ervoor dat (in XAMPP) de Apache en SQL server aanstaan</li>
+            <li>Download <a href="music_collection.sql" download>music_collection.sql</a></li>
+            <li>Ga naar <a href="http://localhost/phpmyadmin/" target="_blank">PhpMyAdmin</a></li>
+            <li>Klik op 'Import' / 'Importeren'</li>
+            <li>Klik op 'Choose file' / 'Bestand kiezen' en selecteer de zojuist gedownloade music_collection.sql</li>
+            <li>Klik vervolgens helemaal onderaan de pagina op de knop 'Import' / 'Starten'</li>
+        </ul>
+        <h4 class="title is-5">
+            Specifieke data selecteren met SQL
+        </h4>
+        <p>
+            Via SQL ga je specifieke vragen stellen aan de database. Dit doe je d.m.v. een query en dan specifiek een
+            <a href="https://www.w3schools.com/sql/sql_select.asp" target="_blank">SELECT Statement</a>.
+        </p>
+        <p class="is-italic">
+            Open de music_collection database
+            door op het 'plusje' voor de naam te klikken en klik vervolgens op de naam 'albums'. Klik nu bovenin op
+            het tabblad 'SQL'. Hier kun je SQL-queries invoeren en zien welk resultaat de database als antwoord geeft.
+            Let op! Het resultaat van een SELECT Statement is altijd een tabel, <strong>ook als deze leeg is</strong>.
+        </p>
+        <blockquote>
+            Formuleer voor onderstaande zinnen de juiste SELECT Statements en voer deze uit op de database.
+            <ul>
+                <li>Toon alle albums. (Aantal 19)</li>
+                <li>Toon alle albums met genre ‘Rock’. (Aantal: 7)</li>
+                <li>Toon alle albums die meer dan 10 tracks bevatten. (Aantal: 17)</li>
+                <li>Toon alle albums die meer dan 10 tracks bevatten en NA 2014 zijn uitgebracht. (Aantal: 9)</li>
+                <li>
+                    Toon alle albums waarvan de artiest begint met een ‘H’. (Aantal: 3). Gebruik hierbij het
+                    <a href="https://www.w3schools.com/sql/sql_like.asp" target="_blank">
+                        <code class="is-underlined">LIKE</code></a> keyword
+                </li>
+                <li>Toon de eerste 5 albums op alfabetische volgorde van de artiest. Gebruik hierbij de
+                    <a href="https://www.w3schools.com/sql/sql_orderby.asp" target="_blank">
+                        <code class="is-underlined">ORDER BY</code></a> en <a href="https://www.w3schools.com/mysql/mysql_limit.asp" target="_blank"><code class="is-underlined">LIMIT</code></a></li>
+            </ul>
+        </blockquote>
+        <h3 class="title is-4">
+            Opdracht 2 - INDEX met database
+        </h3>
+        <p>
+            Maak de indexpagina (zie de map 'start' in week3) voor de muziekalbums, maar nu gekoppeld aan de
+            <a href="https://www.khanacademy.org/computing/computer-programming/sql/sql-basics/pt/querying-the-table" target="_blank">database</a>.
+            Dit vervangt de multidimensionale array uit eerdere lessen.
+            Gebruik hiervoor de database uit opdracht 1. Haal albumdata op uit de database en toon deze in (de bestaande) tabel.
+        </p>
+        <p class="is-italic">
+            Tip 1: in het bestand <code>week3/examples/database-query-flow.php</code> staat de volledige code
+            beschreven (voorzien van comments) hoe je de data van álle albums uit de database haalt.
+            <br/>
+            Tip 2: in de map <code>week3/includes</code> staat het bestand <code>connection.php</code>. Dit is ook het
+            bovenste deel van de code uit <code>database-query-flow.php</code>, dus let op dat je het niet dubbel doet.
+            Deze kan je importeren met de PHP-functie <code>require_once</code>. Hierna is er verbinding gemaakt met de database.
+            Dit kun je ook gebruiken bij de volgende opdracht (details.php) om verbinding te maken met de database.
+        </p>
+        <h3 class="title is-4">
+            Opdracht 3 - DETAILS met database
+        </h3>
+        <p>
+            Maak de detailpagina ook dynamisch vanuit de database. Laat de details zien van he specifieke album dat aangeklikt is.
+        </p>
+        <p class="is-italic">
+            Tip: Denk goed na <span class="is-underlined">welke</span> informatie je moet doorsturen aan de detailpagina vanaf de indexpagina.
+        </p>
+        <h3 class="title is-4">
+            Klaar met bovenstaande opdrachten? Ga met (één van) de volgende zaken verder:
+        </h3>
+        <ul>
+            <li>De eindgebruiker wil nu maar maximaal 5 muziekalbums tegelijk op de index pagina zien. Maak gebruik van
+                <a href="https://bulma.io/documentation/components/pagination/" target="_blank">paginatie</a> om maar 5 albums per
+                keer te bekijken.
+            </li>
+            <li>Ga werken aan de create.php pagina. Let hier vooral op het toevoegen van validatie op alle velden. Gaat er iets fout,
+                toon dan een foutmelding. Zorg er ook voor dat de eerder ingevulde velden niet verloren gaan.
+            </li>
+            <li>Kijk nu of je dit zelf kunt uitbreiden door de informatie ook op te slaan in je database via een INSERT-query.
+                (komt volgende week terug in de les!)
+            </li>
+            <li>Ga alvast nadenken hoe je database voor je reserveringssysteem eruit moet komen te zien. Hier gaan we morgen
+                tijdens CLE mee aan de slag.
+            </li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>

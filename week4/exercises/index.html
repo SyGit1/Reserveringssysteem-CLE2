@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>Lesopdrachten week 4</title>
+</head>
+<body>
+<section class="section">
+    <div class="content">
+        <h2 class="title is-2">
+            Overzicht van de lesopdrachten van week 4
+        </h2>
+
+        <!--Opdracht 1-->
+        <h3 class="title is-4">
+            Opdracht 1: Validatie
+        </h3>
+        <p class="mb-4">
+            In deze opdracht ga je ervoor zorgen dat verzonden informatie in een formulier valide is. De enige veilige plek
+            om dit te controleren is op de server. In dit geval zal je dat dus met PHP moeten doen.
+        </p>
+        <p>
+            Technieken die je hierbij nodig hebt zijn:
+        </p>
+        <ul>
+            <li>
+                Postback, meer info is te vinden in het tweede filmpje van les 2 op
+                <a href="https://eu.feedbackfruits.com/courses/" target="_blank">Feedbackfruits</a>.
+            </li>
+            <li>
+                Validatie, <a href="../../week2/examples/" target="_blank">code</a> van (post.php) in <code>week2/examples</code>
+                of het <a href="../../week4/examples/validation" target="_blank">voorbeeld</a> van deze week in <code>week4/examples/validation</code>
+            </li>
+        </ul>
+        <blockquote>
+            In <a href="opdr1-validation.php">opdracht 1</a> zie je een formulier. Zorg ervoor dat het formulier in PHP wordt gecontroleerd (dus niet met
+            het attribuut <code>required</code> in de HTML). Wanneer het veld leeg gelaten wordt, moet er een foutmelding
+            in de HTML getoond worden.
+        </blockquote>
+
+        <!--Opdracht 2-->
+        <h3 class="title is-4">
+            Opdracht 2: INSERT query
+        </h3>
+        <p class="mb-4">
+            Open <a href="http://localhost/phpmyadmin/" target="_blank">PhpMyAdmin</a> en klik op de database <a
+                href="http://localhost/phpmyadmin/index.php?route=/database/sql&db=music_collection" target="_blank">music_collection</a> en vervolgens op de tabel <a
+                href="http://localhost/phpmyadmin/index.php?route=/table/sql&db=music_collection&table=albums" target="_blank">albums</a>.
+            Klik vervolgens op de tab 'SQL'.
+        </p>
+        <blockquote>
+            Noteer voor het volgende album de INSERT query.
+
+            <ul>
+                <li>album: <span class="is-italic">The Dark Side Of The Moon</span></li>
+                <li>artist: <span class="is-italic">Pink Floyd</span></li>
+                <li>genre: <span class="is-italic">Progressive Rock</span></li>
+                <li>year: <span class="is-italic">1973</span></li>
+                <li>tracks: <span class="is-italic">9</span></li>
+            </ul>
+        </blockquote>
+
+        Klik nu op de tab 'Insert' / 'Invoegen'
+        <blockquote>
+            Voeg hier een album naar keuze toe d.m.v. het formulier.
+            <br>
+            Zie je een groene balk met de tekst: '1 row inserted.' / '1 rij toegevoegd.', dan is het gelukt. Hieronder staat een query. Vergelijk
+            deze query met jouw query.
+        </blockquote>
+
+        <!--Opdracht 3-->
+        <h3 class="title is-4">
+            Opdracht 3: Pseudo Code
+        </h3>
+        <p class="mb-4">
+            In deze opdracht schrijf je de pseudo code voor de createpagina. Hiervoor kun je (als hulpmiddel) gebruik
+            maken van de werkmethode die je kunt vinden in Teams -> programmeren 2 -> Files.
+        </p>
+        <blockquote>
+            <ul>
+                <li>Schrijf de pseudo code van de pagina: create.php</li>
+                <li>
+                    Neem de pseudo code over in je editor en plaats deze als comments bovenaan de create.php pagina
+                    van <code>week4/start/create.php</code>
+                </li>
+            </ul>
+        </blockquote>
+
+        <!--Opdracht 4-->
+        <h3 class="title is-4">
+            Opdracht 4: Create.php
+        </h3>
+        <p class="mb-4">
+            Je hebt nu alle ingrediënten om de createpagina te kunnen maken. Gebruik bij de uitwerking ook stap 4
+            uit de werkmethode. Loop je tegen een error aan, kijk dan of het Debugstroomdiagram je kunt helpen.
+            Deze kun je vinden in Teams -> programmeren 2 -> Files.
+        </p>
+        <blockquote>
+            Werk de createpagina uit, zodat je een album kunt toevoegen aan de database.
+            <ul>
+                <li>Alle velden zijn verplichte velden. Voeg server-side validatie toe</li>
+                <li>Zijn niet alle velden ingevuld, toon dan een foutmelding</li>
+                <li>Bij een foutmelding moeten de velden die goed waren, teruggeschreven worden in het formulier</li>
+                <li>
+                    Na het succesvol toevoegen aan de database moet de gebruiker doorgestuurd worden naar de indexpagina.
+                    Hiervoor kan je gebruik maken van de PHP-functie <a href="https://www.php.net/manual/en/function.header.php" target="_blank">header()</a>
+                </li>
+            </ul>
+        </blockquote>
+
+        <!--Extra-->
+        <h3 class="title is-4">
+            Klaar met bovenstaande opdrachten? Ga met (één van) de volgende zaken verder:
+        </h3>
+        <ul>
+            <li>De eindgebruiker wil de foutmeldingen van de validatie niet samen boven het formulier hebben, maar elke losse foutmelding netjes onder het
+                betreffende veld zien.
+            </li>
+            <li>De eindgebruiker wil nu ook graag een afbeelding uploaden bij het muziekalbum. Voeg een veld toe waar je een plaatje kan uploaden en sla dit
+                plaatje op in de map 'images'. Zorg ervoor dat je geen BLOB-datatype gebruikt in de database voor het plaatje, maar enkel de naam van het plaatje
+                hier als VARCHAR opslaat. Toon de afbeelding ook in de tabel en op de detailpagina.
+            </li>
+            <li>Kijk ook terug bij de extra opdrachten van voorgaande weken en voer degenen uit die je nog hebt opgepakt.</li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>
