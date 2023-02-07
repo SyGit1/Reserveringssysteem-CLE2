@@ -1,0 +1,21 @@
+body{
+    background-color: #EB9939;
+}
+
+h1{
+    font-size: 3em !important;
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+
+}
+img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overzichtbody{
+    background-color: #EB9939;
+}
