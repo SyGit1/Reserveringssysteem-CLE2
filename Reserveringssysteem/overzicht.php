@@ -10,7 +10,7 @@ if(!isset($_SESSION['loggedInUser'])){
     header('location:index.php');
 }
 
-$query = "SELECT COUNT(*) FROM reserveren";
+$query = "SELECT COUNT(*) FROM reservation";
 $result = mysqli_query($db, $query) or die ('Error: ' . $query);
 $total = mysqli_fetch_column($result);
 
@@ -23,13 +23,13 @@ if (isset($_GET['offset'])) {
 }
 
 //Get the result set from the database with a SQL query
-$query = "SELECT * FROM reserveren LIMIT $limit OFFSET $offset";
+$query = "SELECT * FROM reservation LIMIT $limit OFFSET $offset";
 $result = mysqli_query($db, $query) or die ('Error: ' . $query);
 
 //Loop through the result to create a custom array
-$reserveren = [];
+$reservation = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $reserveren[] = $row;
+    $reservation[] = $row;
 }
 
 
@@ -41,15 +41,13 @@ mysqli_close($db);
 <!doctype html>
 <html lang="en">
 <head>
-<link rel='stylesheet' href=
-'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
     <title></title>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class = "overzichtbody">
-<div class="container px-4">
-    <h1 class="title mt-4">reserveren</h1>
+<body>
+<div class="container">
+    <h1 class="title">Overzicht reserveringen</h1>
     <hr>
     <table class="table is-striped">
         <thead>
@@ -65,26 +63,22 @@ mysqli_close($db);
         </tr>
         </thead>
         <tfoot>
-        <tr>
-            <td colspan="6" class="has-text-centered">&copy; Gegevens</td>
-        </tr>
         </tfoot>
         <tbody>
-        <?php foreach ($reserveren as $reserveer) { ?>
+        <?php foreach ($reservation as $reservationdata) { ?>
             
             <tr> <!--entities make what comes back from database encrypted-->
-                <td><?= htmlentities($reserveer['id']) ?></td>
-                <td><?= htmlentities($reserveer['Voornaam']) ?></td>
-                <td><?= htmlentities($reserveer['Achternaam']) ?></td>
-                <td><?= htmlentities($reserveer['Email']) ?></td>
-                <td><?= htmlentities($reserveer['Telefoon_nummer']) ?></td>
-                <td><?= htmlentities($reserveer['Formaat_ruimte']) ?></td>
-                <td><?= htmlentities($reserveer['Datum']) ?></td>
+                <td><?= htmlentities($reservationdata['id']) ?></td>
+                <td><?= htmlentities($reservationdata['firstName']) ?></td>
+                <td><?= htmlentities($reservationdata['lastName']) ?></td>
+                <td><?= htmlentities($reservationdata['email']) ?></td>
+                <td><?= htmlentities($reservationdata['phoneNumber']) ?></td>
+                <td><?= htmlentities($reservationdata['date']) ?></td>
 
                 
 
-                <td> <a href="detail.php?index=<?= $reserveer['id'] ?>">Details</a> </td>
-                <td> <a href="edit.php?index=<?= $reserveer['id'] ?>">Update</a> </td>
+                <td> <a href="rest/detail.php?index=<?= $reservationdata['id'] ?>">Delete</a> </td>
+                <td> <a href="edit.php?index=<?= $reservationdata['id'] ?>">Edit</a> </td>
 
                
 
@@ -103,9 +97,12 @@ mysqli_close($db);
     </div>
 </div>
 
-<button class="button is-white"><a href="index.php">terug</a></button>
-<button class="button is-white"><a href="create.php">create</a></button>
-<button class="button is-white"><a href="logout.php">log uit</a></button>
+<div class="container">
+    <button class="button is-white"><a href="index.php">Home</a></button>
+    <button class="button is-white"><a href="create.php">Afspraak maken</a></button>
+    <button class="button is-white"><a href="logout.php">Log out</a></button>
+</div>
+
 
 
 

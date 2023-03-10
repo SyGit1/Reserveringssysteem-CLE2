@@ -69,7 +69,7 @@ mysqli_close($db);
         </ul>
     </section>
     <div>
-        <a class="button" href="overzicht.php">Go back to the list</a>
+        <a class="button" href="../overzicht.php">Go back to the list</a>
     </div>
     <!-- deletes row from the table-->
     <form action="" method="post" class="delete">

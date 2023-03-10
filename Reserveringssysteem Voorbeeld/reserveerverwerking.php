@@ -1,6 +1,6 @@
 <?php
 //hieronder haal je de formdata op
-require '../includes/database.php';
+require 'includes/database.php';
 
 
 // mysqli_real_escape_string makes the sending of information to the database safer.

@@ -2,7 +2,7 @@
 
 // General settings
 $host       = "localhost";
-$database   = "music_collection";
+$database   = "reserveringssysteem";
 $user       = "root";
 $password   = "";
 

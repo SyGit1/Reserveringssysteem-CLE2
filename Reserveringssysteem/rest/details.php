@@ -49,7 +49,7 @@ mysqli_close($db);
         </ul>
     </section>
     <div>
-        <a class="button" href="index.php">Go back to the list</a>
+        <a class="button" href="../index.php">Go back to the list</a>
     </div>
 </div>
 </body>

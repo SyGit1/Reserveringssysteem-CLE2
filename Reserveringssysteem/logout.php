@@ -1,11 +1,10 @@
 <?php
-//logout page
 // Start the session.
 session_start();
-// destroy the session.
+// end the session.
 session_destroy();
 
-// Redirect to login page
+// Redirect to home page
 header('Location: index.php');
 // Exit the code.
 exit;
