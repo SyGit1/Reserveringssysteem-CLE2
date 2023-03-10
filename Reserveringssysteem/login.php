@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
                     'id' => $user['id'],
                     'name' => $user['name'],
                     'email' => $user['email'],
-//                    'admin' => $user['admin'],
+                    'admin' => $user['admin'],
                 ];
 
                

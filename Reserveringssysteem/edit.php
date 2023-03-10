@@ -19,7 +19,7 @@ $userid = $_GET['index'];
 
 
 //select all from the table reserveren where the id = userid
-$query = "SELECT * FROM reserveren WHERE id = " . $userid;
+$query = "SELECT * FROM reservation WHERE id = " . $userid;
 $result = mysqli_query($db, $query);
 
 //If the reservation doesn't exist, redirect back to the homepage
@@ -30,7 +30,7 @@ if (mysqli_num_rows($result) == 0) {
 
 //Transform the row in the DB table to a PHP array
 //put the result from mysqli_query in reserveren
-$reserveren = mysqli_fetch_assoc($result);
+$reservation = mysqli_fetch_assoc($result);
 
 /** @var mysqli $db */
 
@@ -39,22 +39,22 @@ if (isset($_POST['submit'])) {
 //Require database in this file & image helpers
     require_once "./includes/database.php";
     //Postback with the data showed to the user, first retrieve data from 'Super global'
-$Voornaam = mysqli_real_escape_string($db, $_POST['Voornaam']);
-$Achternaam = mysqli_real_escape_string ($db, $_POST['Achternaam']);
-$Email = mysqli_real_escape_string ($db, $_POST['Email']);
-$Telefoon_nummer = mysqli_real_escape_string ($db, $_POST['Telefoon_nummer']);
-$Formaat_ruimte = mysqli_real_escape_string($db, $_POST['Formaat_ruimte']);
-$Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
+$firstName = mysqli_real_escape_string($db, $_POST['firstName']);
+$lastName = mysqli_real_escape_string ($db, $_POST['lastName']);
+$email = mysqli_real_escape_string ($db, $_POST['email']);
+$phoneNumber = mysqli_real_escape_string ($db, $_POST['phoneNumber']);
+$date = mysqli_real_escape_string($db, $_POST['date']);
+$comments = mysqli_real_escape_string ($db, $_POST['comments']);
 
 
 
 //Require the form validation handling
-    require_once "verwerking/form-validation.php";
+    require_once "form-validation.php";
 
     if (empty($errors)) {
         //Save the record to the database
-        $query = "UPDATE reserveren
-                  SET Voornaam = '$Voornaam', Achternaam = '$Achternaam', Email = '$Email', Telefoon_nummer = '$Telefoon_nummer', Formaat_ruimte = '$Formaat_ruimte', Datum = '$Datum'
+        $query = "UPDATE reservation
+                  SET firstName = '$firstName', lastName = '$lastName', email = '$email', phoneNumber = '$phoneNumber', date = '$date', comments = '$comments'
                   WHERE id = '$userid'";
 
         $result = mysqli_query($db, $query) or die('Error: ' . mysqli_error($db) . ' with query ' . $query);
@@ -75,9 +75,8 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/style.css"/>
-    <link rel="icon" href="img/atelier58.png">
-    <title>info Aanpassen - <?= $reserveren['fname'] ?> <?= $reserveren['Achternaam'] ?></title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
+    <title>info Aanpassen - <?= $reservation['firstName'] ?> <?= $reservation['lastName'] ?></title>
 </head>
 <body>
 <div class="container px-4">
@@ -92,10 +91,10 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="Voornaam" type="text" name="Voornaam" value="<?= $reserveren['Voornaam'] ?>"/>
+                            <input class="input" id="firstName" type="text" name="firstName" value="<?= $reservation['firstName'] ?>"/>
                         </div>
                         <p class="help is-danger">
-                            <?= $errors['Voornaam'] ?? '' ?>
+                            <?= $errors['firstName'] ?? '' ?>
                         </p>
                     </div>
                 </div>
@@ -103,15 +102,15 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
 
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label" for="name">Achternaam</label>
+                    <label class="label" for="lastName">Achternaam</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="Achternaam" type="text" name="Achternaam" value="<?= $reserveren['Achternaam'] ?>"/>
+                            <input class="input" id="lastName" type="text" name="lastName" value="<?= $reservation['lastName'] ?>"/>
                         </div>
                         <p class="help is-danger">
-                            <?= $errors['Achternaam'] ?? '' ?>
+                            <?= $errors['lastName'] ?? '' ?>
                         </p>
                     </div>
                 </div>
@@ -119,15 +118,15 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
 
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label" for="Email">email</label>
+                    <label class="label" for="email">E-mail</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="Email" type="Email" name="Email" value="<?= $reserveren['Email'] ?>"/>
+                            <input class="input" id="email" type="email" name="email" value="<?= $reservation['email'] ?>"/>
                         </div>
                         <p class="help is-danger">
-                            <?= $errors['Email'] ?? '' ?>
+                            <?= $errors['email'] ?? '' ?>
                         </p>
                     </div>
                 </div>
@@ -135,15 +134,15 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
 
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label" for="Telefoon_nummer">Telefoon nummer</label>
+                    <label class="label" for="phoneNumber">Telefoonnummer</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="Telefoon_nummer" type="Telefoon_nummer" name="Telefoon_nummer" value="<?= $reserveren['Telefoon_nummer'] ?>"/>
+                            <input class="input" id="phoneNumber" type="number" name="phoneNumber" value="<?= $reservation['phoneNumber'] ?>"/>
                         </div>
                         <p class="help is-danger">
-                            <?= $errors['Telefoon_nummer'] ?? '' ?>
+                            <?= $errors['phoneNumber'] ?? '' ?>
                         </p>
                     </div>
                 </div>
@@ -151,15 +150,15 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
 
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label" for="Formaat_ruimte">Formaat ruimte</label>
+                    <label class="label" for="comments">Comments</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="Formaat_ruimte" type="text" name="Formaat_ruimte" value="<?= $reserveren['Formaat_ruimte'] ?>"/>
+                            <textarea class="input" id="comments" type="text" name="comments" cols="30" rows="10 value="<?= $reservation['comments'] ?>"/> </textarea>
                         </div>
                         <p class="help is-danger">
-                            <?= $errors['Formaat_ruimte'] ?? '' ?>
+                            <?= $errors['comments'] ?? '' ?>
                         </p>
                     </div>
                 </div>
@@ -172,10 +171,10 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="Datum" type="date" name="Datum" value="<?= $reserveren['Datum'] ?>"/>
+                            <input class="input" id="date" type="date" name="date" value="<?= $reservation['date'] ?>"/>
                         </div>
                         <p class="help is-danger">
-                            <?= $errors['Datum'] ?? '' ?>
+                            <?= $errors['date'] ?? '' ?>
                         </p>
                     </div>
                 </div>
@@ -184,12 +183,12 @@ $Datum = mysqli_real_escape_string ($db, $_POST['Datum']);
             <div class="field is-horizontal">
                 <div class="field-label is-normal"></div>
                 <div class="field-body">
-                    <button class="button is-link is-fullwidth" type="submit" name="submit">Save</button>
+                    <button class="button is-link is-fullwidth" type="submit" name="submit">Opslaan</button>
                 </div>
             </div>
         </form>
     </section>
-    <a class="button" href="overzicht.php">Go back to the list</a>
+    <a class="button-is-white" href="overzicht.php">Go back to the list</a>
 </div>
 </body>
 </html>

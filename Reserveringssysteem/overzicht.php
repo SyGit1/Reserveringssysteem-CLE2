@@ -56,8 +56,7 @@ mysqli_close($db);
             <th>Voornaam</th>
             <th>Achternaam</th>
             <th>E-mail</th>
-            <th>telefoon nummer</th>
-            <th>Formaat Ruimte</th>
+            <th>Telefoonnummer</th>
             <th>Datum</th>
 
         </tr>
@@ -77,7 +76,7 @@ mysqli_close($db);
 
                 
 
-                <td> <a href="rest/detail.php?index=<?= $reservationdata['id'] ?>">Delete</a> </td>
+                <td> <a href="rest/detail.php?index=<?= $reservationdata['id'] ?>">Details</a> </td>
                 <td> <a href="edit.php?index=<?= $reservationdata['id'] ?>">Edit</a> </td>
 
                
