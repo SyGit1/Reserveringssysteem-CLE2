@@ -16,7 +16,7 @@ include_once 'includes/database.php';
 <nav>
     <div>
         <a href="../index.php">Home</a>
-        <a href="detail.php">Mijn reserveringen</a>
+        <a href="../detail.php">Mijn reserveringen</a>
         <a href="../login.php">Login</a>
     </div>
 </nav>

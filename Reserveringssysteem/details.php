@@ -5,20 +5,20 @@ require_once "includes/database.php";
 
 //If the ID isn't given, redirect to the homepage
 if (!isset($_GET['id']) || $_GET['id'] === '') {
-    header('Location: index.php');
+    header('Location: overzicht.php');
     exit;
 }
 
 //Retrieve the GET parameter from the 'Super global'
-$albumId = $_GET['id'];
+$userId = $_GET['id'];
 
 //Get the record from the database result
-$query = "SELECT * FROM albums WHERE id = " . $albumId;
+$query = "SELECT * FROM reservation WHERE id = " . $userId;
 $result = mysqli_query($db, $query);
 
 //If the album doesn't exist, redirect back to the homepage
 if (mysqli_num_rows($result) == 0) {
-    header('Location: index.php');
+    header('Location: overzicht.php');
     exit;
 }
 
@@ -49,8 +49,9 @@ mysqli_close($db);
         </ul>
     </section>
     <div>
-        <a class="button" href="../index.php">Go back to the list</a>
+        <a class="button" href="index.php">Go back to the list</a>
     </div>
 </div>
+
 </body>
 </html>

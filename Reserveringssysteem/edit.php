@@ -188,7 +188,7 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
             </div>
         </form>
     </section>
-    <a class="button-is-white" href="overzicht.php">Go back to the list</a>
+    <a class="button-is-white" href="overzicht.php">Terug naar het overzicht</a>
 </div>
 </body>
 </html>

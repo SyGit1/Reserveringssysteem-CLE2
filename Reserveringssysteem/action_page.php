@@ -18,7 +18,7 @@ VALUES ('$firstName', '$lastName', '$email', '$phoneNumber', '$comments' ,'$date
 
 //if the information is right send back to index.php if wrong show error.
 if ($db->query($sql) === TRUE) {
-    header("Location: ../index.php");
+    header("Location: overzicht.php");
 } else {
     echo "Error: " . $sql . "<br>" . $db->error;
 }

@@ -76,7 +76,7 @@ mysqli_close($db);
 
                 
 
-                <td> <a href="rest/detail.php?index=<?= $reservationdata['id'] ?>">Details</a> </td>
+                <td> <a href="detail.php?index=<?= $reservationdata['id'] ?>">Details</a> </td>
                 <td> <a href="edit.php?index=<?= $reservationdata['id'] ?>">Edit</a> </td>
 
                
