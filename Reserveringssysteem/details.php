@@ -1,18 +1,18 @@
 <?php
-//Require database in this file
-/** @var $db */
+// Require database & fetch $db variable
 require_once "includes/database.php";
+/** @var $db */
 
-//If the ID isn't given, redirect to the homepage
+// If the ID isn't given, redirect to the "overzicht"
 if (!isset($_GET['id']) || $_GET['id'] === '') {
     header('Location: overzicht.php');
     exit;
 }
 
-//Retrieve the GET parameter from the 'Super global'
+// Retrieve the GET parameter from the 'Super global'
 $userId = $_GET['id'];
 
-//Get the record from the database result
+// Get the record from the database result
 $query = "SELECT * FROM reservation WHERE id = " . $userId;
 $result = mysqli_query($db, $query);
 

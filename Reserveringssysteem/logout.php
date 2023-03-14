@@ -1,10 +1,9 @@
 <?php
 // Start the session.
 session_start();
-// end the session.
+// End the session.
 session_destroy();
 
-// Redirect to home page
+// Redirect to index.php & exit
 header('Location: index.php');
-// Exit the code.
 exit;

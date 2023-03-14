@@ -1,9 +1,10 @@
+<!-- This file stores the form data from the sign-up form in the database as well as giving errors-->
 <?php
-//hieronder haal je de formdata op
+// Require database & fetch $db variable
 require 'includes/database.php';
 /** @var $db */
 
-// mysqli_real_escape_string makes the sending of information to the database safer.
+// mysqli_real_escape_string makes the sending of information to the database more secure
 $name = mysqli_real_escape_string ($db, $_POST['name']);
 $email = mysqli_real_escape_string ($db, $_POST['email']);
 $password = mysqli_real_escape_string ($db, $_POST['password']);
@@ -22,10 +23,10 @@ if($password == '') {
 
 // If data valid
 if(empty($errors)) {
-    // create a secure password, with the PHP function password_hash()
+    // Create a secure password, with the PHP function password_hash()
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    // store the new user in the database.
+    // Store the new user in the database.
     $query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
 
     $result = mysqli_query($db, $query);

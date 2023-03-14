@@ -1,18 +1,20 @@
+<!--This is the login page-->
 <?php
-//session start keeps the accoutn logged in
+// Session start to make sure the account stays logged in
 session_start();
-//login page
 
+// Login is set to false by default
 $login = false;
-// Is user logged in?
-//isset checkt of de loggedinuser bestaat(boolean). 
+// isset checks if the loggedInUser exists(bool), if the answer is yes then the login is successful
 if (isset($_SESSION['loggedInUser'])) {
     $login = true;
 }
 
 if (isset($_POST['submit'])) {
-    /** @var mysqli $db */
+
+    // Connect to the database & define $db variable
     require_once "includes/database.php";
+    /** @var mysqli $db */
 
     // Get form data
     $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -33,7 +35,7 @@ if (isset($_POST['submit'])) {
         $query = "SELECT * FROM users WHERE email='$email'";
         $result = mysqli_query($db, $query);
 
-        // check if the user exists
+        // Check if the user exists
         if (mysqli_num_rows($result) == 1) {
             // Get user data from result
             $user = mysqli_fetch_assoc($result);
@@ -50,13 +52,14 @@ if (isset($_POST['submit'])) {
                     'admin' => $user['admin'],
                 ];
 
-               
+
             } else {
-                //error incorrect log in
+                // Error if login is incorrect
                 $errors['loginFailed'] = 'E-mail of wachtwoord is niet correct.';
             }
         } else {
-            //error incorrect log in
+            // Error if email is incorrect
+            // Identical error so as to not give anything away
             $errors['loginFailed'] = 'E-mail of wachtwoord is niet correct.';
         }
     }
@@ -71,9 +74,9 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="icon"
- 
+
           sizes="32x32">
-    
+
     <title>Log in</title>
 </head>
 <body>
@@ -102,10 +105,10 @@ if (isset($_POST['submit'])) {
             </div>
 
     </form>
-            <div class="container">
-                <button class="button is-white"><a href="index.php">Home</a></button>
-            </div>
-        </section>
+    <div class="container">
+        <button class="button is-white"><a href="index.php">Home</a></button>
+    </div>
+    </section>
 
 <?php } ?>
 

@@ -1,41 +1,37 @@
-
-
+<!--Detail.php allows you to view and delete appointments-->
 <?php
-//here you can see details and delete rows from the table.
-// Include data 
+
+// Include database & fetch $db variable
 require_once './includes/database.php';
 /** @var $db */
-// Wil not recieve index because of deeplink and redirects to index.php
-// IF index is not present in url or value is empty
-if (!isset($_GET['index']) || $_GET['index'] === '')
-{
-    // redirect to index.php
+
+// If user is not logged in redirect them to index.php, this is to prevent deeplinking
+if (!isset($_GET['index']) || $_GET['index'] === '') {
     header('Location: index.php');
     exit;
 }
-//get index from database
+// Get index from database
 $userId = $_GET['index'];
 
-//select al from the table reserveren wehere id = the same as userid.
-//result gets connection through database.php
+// Select all from the table reservation where id === userId
+// Result gets connection through database.php
 $query = "SELECT * FROM reservation WHERE id = " . $userId;
 $result = mysqli_query($db, $query);
 
 if (mysqli_num_rows($result) == 0) {
-    header(header:'location: index.php');
+    header(header: 'location: index.php');
     exit;
 }
-    
 
-//result is the table en wil be shown in the user array. 
+
+// Result is the table en wil be shown in the user array
 $user = mysqli_fetch_assoc($result);
 
-//check if remove button is pressed.
-if(isset($_POST['deleteButton'])) {
-    //Remove reservation
-    //Send to index
+// Check if remove button is pressed
+if (isset($_POST['deleteButton'])) {
+    // Remove reservation & send back to the ''overzicht''
     $query = "DELETE FROM reservation WHERE id = '$userId'";
-    mysqli_query($db,$query);
+    mysqli_query($db, $query);
     header('location: overzicht.php');
     exit;
 }
@@ -58,23 +54,23 @@ mysqli_close($db);
     <h1 class="title mt-4">Informatie</h1>
     <section class="content">
         <ul>
-            <li>id: <?= htmlentities ($user ['id']) ?></li>
-            <li>Voornaam: <?= htmlentities ($user['firstName']) ?></li>
-            <li>Achternaam: <?= htmlentities ($user['lastName']) ?></li>
-            <li>E-mail: <?= htmlentities ($user['email']) ?></li>
-            <li>Telefoonnummer: <?= htmlentities ($user['phoneNumber']) ?></li>
-            <li>Comments: <?= htmlentities ($user['comments']) ?></li>
-            <li>Datum: <?= htmlentities ($user['date']) ?></li>
+            <li>id: <?= htmlentities($user ['id']) ?></li>
+            <li>Voornaam: <?= htmlentities($user['firstName']) ?></li>
+            <li>Achternaam: <?= htmlentities($user['lastName']) ?></li>
+            <li>E-mail: <?= htmlentities($user['email']) ?></li>
+            <li>Telefoonnummer: <?= htmlentities($user['phoneNumber']) ?></li>
+            <li>Comments: <?= htmlentities($user['comments']) ?></li>
+            <li>Datum: <?= htmlentities($user['date']) ?></li>
         </ul>
     </section>
-
 
 
     <div class="container">
         <form action="" method="post" class="delete">
             <div class="container">
-            <input class="button is-white" name="deleteButton" id="deleteButton" type="submit" value="Afspraak verwijderen">
-            <a class="button is-white" href="overzicht.php">Terug naar het overzicht</a>
+                <input class="button is-white" name="deleteButton" id="deleteButton" type="submit"
+                       value="Afspraak verwijderen">
+                <a class="button is-white" href="overzicht.php">Terug naar het overzicht</a>
             </div>
         </form>
     </div>

@@ -1,35 +1,32 @@
 <?php
-//in this edit.php you can change information in rows of the table. 
 
-//Require database in this file
+// Require database & fetch $db variable
 /** @var $db */
 require_once "./includes/database.php";
 
-//If the ID isn't given, redirect to the homepage
-//When not logged in send back to overzicht.php
-//if index is not found or empty send to overzicht.php
+// When not logged in send back to overzicht.php
 if (!isset($_GET['index']) || $_GET['index'] === '') {
     header('Location: overzicht.php');
     exit;
 }
 
-//Retrieve the GET parameter from the 'Super global'
-// userid is a variable where the index is stored
-$userid = $_GET['index']; 
+// Retrieve the GET parameter from the 'Super global'
+// Store index in $userId
+$userId = $_GET['index'];
 
 
-//select all from the table reserveren where the id = userid
-$query = "SELECT * FROM reservation WHERE id = " . $userid;
+// Select all from the table reservation where the id = userId
+$query = "SELECT * FROM reservation WHERE id = " . $userId;
 $result = mysqli_query($db, $query);
 
-//If the reservation doesn't exist, redirect back to the homepage
+// If the reservation doesn't exist, redirect back to the ''overzicht''
 if (mysqli_num_rows($result) == 0) {
     header('Location: overzicht.php');
     exit;
 }
 
-//Transform the row in the DB table to a PHP array
-//put the result from mysqli_query in reserveren
+// Transform the row in the DB table to a PHP array
+// Store the result in a new variable
 $reservation = mysqli_fetch_assoc($result);
 
 /** @var mysqli $db */
@@ -39,27 +36,26 @@ if (isset($_POST['submit'])) {
 //Require database in this file & image helpers
     require_once "./includes/database.php";
     //Postback with the data showed to the user, first retrieve data from 'Super global'
-$firstName = mysqli_real_escape_string($db, $_POST['firstName']);
-$lastName = mysqli_real_escape_string ($db, $_POST['lastName']);
-$email = mysqli_real_escape_string ($db, $_POST['email']);
-$phoneNumber = mysqli_real_escape_string ($db, $_POST['phoneNumber']);
-$date = mysqli_real_escape_string($db, $_POST['date']);
-$comments = mysqli_real_escape_string ($db, $_POST['comments']);
+    $firstName = mysqli_real_escape_string($db, $_POST['firstName']);
+    $lastName = mysqli_real_escape_string($db, $_POST['lastName']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $phoneNumber = mysqli_real_escape_string($db, $_POST['phoneNumber']);
+    $date = mysqli_real_escape_string($db, $_POST['date']);
+    $comments = mysqli_real_escape_string($db, $_POST['comments']);
 
 
-
-//Require the form validation handling
+// Require the form validation handling
     require_once "form-validation.php";
 
     if (empty($errors)) {
         //Save the record to the database
         $query = "UPDATE reservation
                   SET firstName = '$firstName', lastName = '$lastName', email = '$email', phoneNumber = '$phoneNumber', date = '$date', comments = '$comments'
-                  WHERE id = '$userid'";
+                  WHERE id = '$userId'";
 
         $result = mysqli_query($db, $query) or die('Error: ' . mysqli_error($db) . ' with query ' . $query);
 
-        //Close connection
+        // Close connection
         mysqli_close($db);
 
         // Redirect to index.php
@@ -91,7 +87,8 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="firstName" type="text" name="firstName" value="<?= $reservation['firstName'] ?>"/>
+                            <input class="input" id="firstName" type="text" name="firstName"
+                                   value="<?= $reservation['firstName'] ?>"/>
                         </div>
                         <p class="help is-danger">
                             <?= $errors['firstName'] ?? '' ?>
@@ -107,7 +104,8 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="lastName" type="text" name="lastName" value="<?= $reservation['lastName'] ?>"/>
+                            <input class="input" id="lastName" type="text" name="lastName"
+                                   value="<?= $reservation['lastName'] ?>"/>
                         </div>
                         <p class="help is-danger">
                             <?= $errors['lastName'] ?? '' ?>
@@ -123,7 +121,8 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="email" type="email" name="email" value="<?= $reservation['email'] ?>"/>
+                            <input class="input" id="email" type="email" name="email"
+                                   value="<?= $reservation['email'] ?>"/>
                         </div>
                         <p class="help is-danger">
                             <?= $errors['email'] ?? '' ?>
@@ -139,7 +138,8 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" id="phoneNumber" type="number" name="phoneNumber" value="<?= $reservation['phoneNumber'] ?>"/>
+                            <input class="input" id="phoneNumber" type="number" name="phoneNumber"
+                                   value="<?= $reservation['phoneNumber'] ?>"/>
                         </div>
                         <p class="help is-danger">
                             <?= $errors['phoneNumber'] ?? '' ?>
@@ -155,7 +155,8 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <textarea class="input" id="comments" type="text" name="comments" cols="30" rows="10 value="<?= $reservation['comments'] ?>"/> </textarea>
+                            <textarea class="input" id="comments" type="text" name="comments" cols="30"
+                                      rows="10 value="<?= $reservation['comments'] ?>"/> </textarea>
                         </div>
                         <p class="help is-danger">
                             <?= $errors['comments'] ?? '' ?>

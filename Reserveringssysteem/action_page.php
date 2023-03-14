@@ -1,5 +1,5 @@
 <?php
-//hieronder haal je de formdata op
+// Require database & define $db variable
 require 'includes/database.php';
 /** @var $db */
 
@@ -12,11 +12,11 @@ $comments = mysqli_real_escape_string ($db, $_POST['comments']);
 $date =  mysqli_real_escape_string ($db, $_POST['date']);
 
 
-//This puts the information in the table reserveren.
+// This puts the information in the table reservation
 $sql = "INSERT INTO reservation (firstName, lastName, email, phoneNumber, comments, date)
 VALUES ('$firstName', '$lastName', '$email', '$phoneNumber', '$comments' ,'$date')";
 
-//if the information is right send back to index.php if wrong show error.
+// If the information is right send back to pverzicht.php else show error
 if ($db->query($sql) === TRUE) {
     header("Location: overzicht.php");
 } else {

@@ -1,9 +1,10 @@
 <?php
-//Form that client fills in.
-// this is the first page shown
+// The sign-up is hosted on index.php for convenience's sake
 include_once 'includes/database.php';
 ?>
 
+
+<!--Sign-up form-->
 <!DOCTYPE html>
 <html>
 <head>

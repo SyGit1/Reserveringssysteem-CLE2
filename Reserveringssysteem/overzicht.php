@@ -1,11 +1,13 @@
-<!--shows data from users(clients) and you are able to go to create, update and details(delete) from here.--> 
+<!-- Overview of all made appointments, through this page you can access the CRUD functionalities-->
 
 <?php
-/** @var mysqli $db */
+// Require database & fetch $db variable
 require_once "includes/database.php";
+/** @var mysqli $db */
 
 session_start();
 
+// Redirect user to the index.php if user isn't logged in
 if(!isset($_SESSION['loggedInUser'])){
     header('location:index.php');
 }
@@ -14,7 +16,7 @@ $query = "SELECT COUNT(*) FROM reservation";
 $result = mysqli_query($db, $query) or die ('Error: ' . $query);
 $total = mysqli_fetch_column($result);
 
-//Define offset from URL
+// Define offset from URL
 $limit = 5;
 $offset = 0;
 
@@ -22,11 +24,11 @@ if (isset($_GET['offset'])) {
     $offset = $_GET['offset'];
 }
 
-//Get the result set from the database with a SQL query
+// Get the result set from the database with a SQL query
 $query = "SELECT * FROM reservation LIMIT $limit OFFSET $offset";
 $result = mysqli_query($db, $query) or die ('Error: ' . $query);
 
-//Loop through the result to create a custom array
+// Loop through the result to create an array
 $reservation = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $reservation[] = $row;

@@ -1,6 +1,7 @@
 <?php
-//Form that client fills in.
-// this is the first page shown
+// This is where the client can make a new reservation
+
+// Include database
 include_once 'includes/database.php';
 ?>
 
@@ -13,13 +14,6 @@ include_once 'includes/database.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 <body>
-<nav>
-    <div>
-        <a href="index.php">Home</a>
-        <a href="detail.php">Mijn reserveringen</a>
-        <a href="logout.php">Log out</a>
-    </div>
-</nav>
 <section class="section">
     <div class="container">
         <h1 class="title">Afspraak maken</h1>
@@ -53,6 +47,11 @@ include_once 'includes/database.php';
             <button type="submit">Versturen</button>
         </div>
     </form>
+    <div class="container">
+        <button class="button is-white"><a href="index.php">Home</a></button>
+        <button class="button is-white"><a href="overzicht.php">Terug naar het overzicht</a></button>
+        <button class="button is-white"><a href="logout.php">Log out</a></button>
+    </div>
 </section>
 </body>
 </html>
