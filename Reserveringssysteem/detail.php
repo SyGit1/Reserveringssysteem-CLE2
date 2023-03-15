@@ -2,7 +2,7 @@
 <?php
 
 // Include database & fetch $db variable
-require_once './includes/database.php';
+require_once 'includes/database.php';
 /** @var $db */
 
 // If user is not logged in redirect them to index.php, this is to prevent deeplinking

@@ -2,7 +2,7 @@
 
 // Require database & fetch $db variable
 /** @var $db */
-require_once "./includes/database.php";
+require_once "includes/database.php";
 
 // When not logged in send back to overzicht.php
 if (!isset($_GET['index']) || $_GET['index'] === '') {
@@ -34,7 +34,7 @@ $reservation = mysqli_fetch_assoc($result);
 //Transform the row in the DB table to a PHP array
 if (isset($_POST['submit'])) {
 //Require database in this file & image helpers
-    require_once "./includes/database.php";
+    require_once "includes/database.php";
     //Postback with the data showed to the user, first retrieve data from 'Super global'
     $firstName = mysqli_real_escape_string($db, $_POST['firstName']);
     $lastName = mysqli_real_escape_string($db, $_POST['lastName']);
@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
     require_once "form-validation.php";
 
     if (empty($errors)) {
-        //Save the record to the database
+        // Save the record to the database
         $query = "UPDATE reservation
                   SET firstName = '$firstName', lastName = '$lastName', email = '$email', phoneNumber = '$phoneNumber', date = '$date', comments = '$comments'
                   WHERE id = '$userId'";
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css'>
-    <title>info Aanpassen - <?= $reservation['firstName'] ?> <?= $reservation['lastName'] ?></title>
+    <title>Info aanpassen</title>
 </head>
 <body>
 <div class="container px-4">
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
         <form class="column is-6" action="" method="post">
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label" for="Fname">Voornaam</label>
+                    <label class="label" for="firstName">Voornaam</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -155,8 +155,7 @@ if (isset($_POST['submit'])) {
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <textarea class="input" id="comments" type="text" name="comments" cols="30"
-                                      rows="10 value="<?= $reservation['comments'] ?>"/> </textarea>
+                            <input class="input" id="comments" type="text" name="comments" value="<?= $reservation['comments'] ?>"/> </input>
                         </div>
                         <p class="help is-danger">
                             <?= $errors['comments'] ?? '' ?>
