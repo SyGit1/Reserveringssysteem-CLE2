@@ -8,9 +8,9 @@ include_once 'includes/database.php';
 /** @var $comments */
 /** @var $date */
 
-//Check if data is valid & generate error if not so
+// Check if data is valid, generate error if not
 $errors = [];
-if ($firstName== "") {
+if ($firstName == "") {
     $errors['firstName'] = 'Voornaam kan niet leeg zijn';
 }
 if ($lastName == "") {

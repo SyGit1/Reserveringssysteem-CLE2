@@ -27,9 +27,9 @@ if (mysqli_num_rows($result) == 0) {
 // Result is the table en wil be shown in the user array
 $user = mysqli_fetch_assoc($result);
 
-// Check if remove button is pressed
+// Check if deleteButton is pressed
 if (isset($_POST['deleteButton'])) {
-    // Remove reservation & send back to the ''overzicht''
+    // Delete reservation & send user back to the ''overzicht''
     $query = "DELETE FROM reservation WHERE id = '$userId'";
     mysqli_query($db, $query);
     header('location: overzicht.php');
@@ -63,7 +63,6 @@ mysqli_close($db);
             <li>Datum: <?= htmlentities($user['date']) ?></li>
         </ul>
     </section>
-
 
     <div class="container">
         <form action="" method="post" class="delete">

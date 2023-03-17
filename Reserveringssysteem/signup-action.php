@@ -4,7 +4,6 @@
 require 'includes/database.php';
 /** @var $db */
 
-// mysqli_real_escape_string makes the sending of information to the database more secure
 $name = mysqli_real_escape_string ($db, $_POST['name']);
 $email = mysqli_real_escape_string ($db, $_POST['email']);
 $password = mysqli_real_escape_string ($db, $_POST['password']);

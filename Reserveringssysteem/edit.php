@@ -1,3 +1,41 @@
+require_once database
+@var $db
+
+if !isset index
+    send user back to overzicht.php
+
+make $userId variable = $_GET index
+
+get data from database $query = sql query SELECT * FROM reservation WHERE id = $userId
+make variable for the result, $result = mysqil_query($db, $query)
+
+if result == 0
+    send user back to overzicht.php
+
+make new variable to store the database data in an array --> $reservation = mysqli_fetch_assoc($result)
+
+get @var mysqli $db
+
+check if form has been submitted :
+if (isset($_POST['submit']))
+    require database
+    make variable for each thing you want to send to the database
+    $firstName = mysqli_real_escape_string $db post firstName
+    ^ also do this for lastName, email, phoneNumber, date & comments
+
+require_once form validation handling
+
+if !$errors {
+    overwrite current database data with new one from form input ^
+    $query = UPDATE reservation SET firstName = $firstName , do this for every input
+
+    $result = mysqli_query(db, query) or die , give an error here
+
+    close database mysqli_close($db)
+
+    send user back to overzicht.php
+}
+
 <?php
 
 // Require database & fetch $db variable
@@ -31,11 +69,11 @@ $reservation = mysqli_fetch_assoc($result);
 
 /** @var mysqli $db */
 
-//Transform the row in the DB table to a PHP array
+// Transform the row in the DB table to a PHP array
 if (isset($_POST['submit'])) {
-//Require database in this file & image helpers
+// Require database
     require_once "includes/database.php";
-    //Postback with the data showed to the user, first retrieve data from 'Super global'
+    // Postback with the data shown to the user, first retrieve data from 'Super global'
     $firstName = mysqli_real_escape_string($db, $_POST['firstName']);
     $lastName = mysqli_real_escape_string($db, $_POST['lastName']);
     $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -44,9 +82,10 @@ if (isset($_POST['submit'])) {
     $comments = mysqli_real_escape_string($db, $_POST['comments']);
 
 
-// Require the form validation handling
+// Require the form validation handling for server side validation
     require_once "form-validation.php";
 
+    // Update the database with the new input values
     if (empty($errors)) {
         // Save the record to the database
         $query = "UPDATE reservation
@@ -58,7 +97,7 @@ if (isset($_POST['submit'])) {
         // Close connection
         mysqli_close($db);
 
-        // Redirect to index.php
+        // Redirect to overzicht.php
         header('Location: overzicht.php');
         exit;
     }
